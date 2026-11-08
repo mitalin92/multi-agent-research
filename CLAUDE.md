@@ -22,10 +22,12 @@ Three agents run in sequence:
 - Use inheritance, *args/**kwargs or other advanced patterns only when they genuinely make the code better. When you use them, explain why in a short comment and tell me in chat.
 
 ## Structure
-- models.py: Pydantic models
-- tools.py: Tavily search tool
-- agents/researcher.py, agents/analyst.py, agents/writer.py
-- main.py: runs the pipeline
+src layout: the code lives in an installable package, `research_pipeline`, under src/.
+Import it as a package, e.g. `from research_pipeline.models import Source`.
+- src/research_pipeline/models.py: Pydantic models
+- src/research_pipeline/tools.py: Tavily search tool
+- src/research_pipeline/agents/researcher.py, analyst.py, writer.py
+- main.py: entry point that runs the pipeline (`uv run main.py`)
 - outputs/: generated reports
 
 ## How to work with me

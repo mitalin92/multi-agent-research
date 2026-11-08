@@ -1,7 +1,7 @@
 [project]
 name = "multi-agent-research"
 version = "0.1.0"
-description = "Add your description here"
+description = "A multi-agent AI research pipeline: Researcher, Analyst, Writer"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -9,4 +9,21 @@ dependencies = [
     "pydantic>=2.14.3",
     "python-dotenv>=1.2.4",
     "tavily-python>=0.8.5",
+]
+
+# A build system makes this a real installable package. uv installs it into
+# .venv in "editable" mode, so `import research_pipeline` works everywhere
+# and code changes take effect without reinstalling.
+[build-system]
+requires = ["uv_build>=0.11.0,<0.12"]
+build-backend = "uv_build"
+
+# The project name (multi-agent-research) differs from the import name,
+# so tell the build backend which folder under src/ is the package.
+[tool.uv.build-backend]
+module-name = "research_pipeline"
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.4.0",
 ]
