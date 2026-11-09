@@ -14,16 +14,18 @@ I built this project to understand how multi-agent systems work from the inside:
 
 The code is plain Python with no agent frameworks, so every step is visible and easy to follow.
 
-![App screenshot](docs/app.png)
 
 ## Architecture
 
 ```mermaid
-flowchart LR
-    Q[Question] --> R[Researcher]
-    R -- "web_search(query)" --> T[(Tavily)]
-    T -- results --> R
-    R -- ResearchFindings --> A[Analyst]
+flowchart TD
+    Q[Question] --> RS
+    subgraph RS [Researcher]
+        direction LR
+        R[Tool-calling loop] -- "web_search(query)" --> T[(Tavily)]
+        T -- results --> R
+    end
+    RS -- ResearchFindings --> A[Analyst]
     A -- AnalysisInsights --> W[Writer]
     W -- ResearchReport --> M[Markdown report]
 ```
